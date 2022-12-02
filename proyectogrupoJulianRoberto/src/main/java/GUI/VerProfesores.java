@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class VerProfesores extends javax.swing.JFrame {
-
+     DefaultTableModel modelo;
     Informacion2 ma = new Informacion2();
     public VerProfesores() {
         initComponents();
         ArrayList<Profesores> P = ma.Leer();
-        DefaultTableModel modelo = new DefaultTableModel();
-        
+       
+        modelo= new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Cedula");
@@ -43,6 +43,7 @@ public class VerProfesores extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +96,15 @@ public class VerProfesores extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Datos de los Profesores");
 
+        btnBorrar.setBackground(new java.awt.Color(195, 0, 0));
+        btnBorrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
         paneldataLayout.setHorizontalGroup(
@@ -107,13 +117,17 @@ public class VerProfesores extends javax.swing.JFrame {
             .addGroup(paneldataLayout.createSequentialGroup()
                 .addGap(275, 275, 275)
                 .addComponent(jLabel1)
+                .addGap(97, 97, 97)
+                .addComponent(btnBorrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnBorrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -139,10 +153,17 @@ public class VerProfesores extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        if (data.getSelectedRow() == -1)
+            return;
+        modelo.removeRow(data.getSelectedRow());
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JTable data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

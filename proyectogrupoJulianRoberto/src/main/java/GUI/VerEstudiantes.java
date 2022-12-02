@@ -5,16 +5,20 @@ import Sistema.Estudiantes;
 import Sistema.Informacion;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VerEstudiantes extends javax.swing.JFrame {
-
+      DefaultTableModel modelo;
     Informacion ma = new Informacion();
+
     public VerEstudiantes() {
         initComponents();
-        ArrayList<Estudiantes> ET = ma.Leer();
-        DefaultTableModel modelo = new DefaultTableModel();
+       
         
+        ArrayList<Estudiantes> ET = ma.Leer();
+        
+         modelo= new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
         modelo.addColumn("Cedula");
@@ -22,10 +26,14 @@ public class VerEstudiantes extends javax.swing.JFrame {
         modelo.addColumn("Beca");
         modelo.addColumn("Estado");
         modelo.addColumn("Seccion");
+        this.tabla.setModel(modelo);
         for (int i = 0; i < ET.size(); i++) {
-            modelo.addRow(new Object[]{ET.get(i).getNombre(),ET.get(i).getApellidos(),ET.get(i).getCedula(),ET.get(i).getEdad(),ET.get(i).getEstadobeca(),ET.get(i).getEstudianteEstado(),ET.get(i).getSeccion()});
+            
+           modelo.addRow(new Object[]{ET.get(i).getNombre(),ET.get(i).getApellidos(),ET.get(i).getCedula(),ET.get(i).getEdad(),ET.get(i).getEstadobeca(),ET.get(i).getEstudianteEstado(),ET.get(i).getSeccion()});
+           
         }
-        data.setModel(modelo);
+        
+       tabla.setModel(modelo);
     }
 
     /**
@@ -40,8 +48,10 @@ public class VerEstudiantes extends javax.swing.JFrame {
         paneldata = new javax.swing.JPanel();
         back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        data = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnborrar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,9 +64,9 @@ public class VerEstudiantes extends javax.swing.JFrame {
             }
         });
 
-        data.setBackground(new java.awt.Color(155, 95, 250));
-        data.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        data.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setBackground(new java.awt.Color(155, 95, 250));
+        tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -88,11 +98,27 @@ public class VerEstudiantes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(data);
+        jScrollPane1.setViewportView(tabla);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Datos de los Estudiantes");
+
+        btnborrar.setBackground(new java.awt.Color(155, 0, 0));
+        btnborrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnborrar.setText("Borrar");
+        btnborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnborrarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
@@ -106,13 +132,20 @@ public class VerEstudiantes extends javax.swing.JFrame {
             .addGroup(paneldataLayout.createSequentialGroup()
                 .addGap(275, 275, 275)
                 .addComponent(jLabel1)
+                .addGap(44, 44, 44)
+                .addComponent(btnborrar)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnborrar)
+                    .addComponent(btnModificar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -138,13 +171,25 @@ public class VerEstudiantes extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+       if (tabla.getSelectedRow() == -1)
+           return;
+       modelo.removeRow(tabla.getSelectedRow() );
+    }//GEN-LAST:event_btnborrarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+       
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JTable data;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnborrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel paneldata;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
