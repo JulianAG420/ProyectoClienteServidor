@@ -3,7 +3,7 @@ package GUI;
 
 import Sistema.Estudiantes;
 import Sistema.Informacion;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +15,7 @@ public class VerEstudiantes extends javax.swing.JFrame {
     public VerEstudiantes() {
         initComponents();
        
-        
+       
         ArrayList<Estudiantes> ET = ma.Leer();
         
          modelo= new DefaultTableModel();
@@ -172,13 +172,33 @@ public class VerEstudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
-       if (tabla.getSelectedRow() == -1)
-           return;
-       modelo.removeRow(tabla.getSelectedRow() );
+     for (int i = 0; i < modelo.getRowCount(); i++) {
+		
+		if(((String)modelo.getValueAt(i, 0)).equals(btnborrar.getText())) {	
+			modelo.removeRow(i);
+			break;
+			
+		}
+	}
+	//Limpieza del archivo .txt
+	
+	try {
+		PrintWriter writer = new PrintWriter("Estudiantes.txt");
+		writer.print("");
+		writer.close();
+	} catch (Exception e) {
+		JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
+	}
     }//GEN-LAST:event_btnborrarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       
+    
+               
+          
+              
+          
+		
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
 

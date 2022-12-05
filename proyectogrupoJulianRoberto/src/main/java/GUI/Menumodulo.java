@@ -136,7 +136,9 @@ public class Menumodulo extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void AlmuerzosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlmuerzosActionPerformed
-          
+          Almuerzo almuerzo = new Almuerzo();
+          almuerzo.setVisible(true);
+          almuerzo.setLocationRelativeTo(this);
       
     }//GEN-LAST:event_AlmuerzosActionPerformed
 

@@ -1,12 +1,13 @@
 
 package GUI;
 
-import Sistema.Estudiantes;
-import Sistema.Informacion;
+
+
 import Sistema.Informacion2;
 import Sistema.Profesores;
-import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VerProfesores extends javax.swing.JFrame {
@@ -154,9 +155,24 @@ public class VerProfesores extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        if (data.getSelectedRow() == -1)
-            return;
-        modelo.removeRow(data.getSelectedRow());
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+		
+		if(((String)modelo.getValueAt(i, 0)).equals(btnBorrar.getText())) {	
+			modelo.removeRow(i);
+			break;
+			
+		}
+	}
+	//Limpieza del archivo .txt
+	
+	try {
+		PrintWriter writer = new PrintWriter("Profesores.txt");
+		writer.print("");
+		writer.close();
+	} catch (Exception e) {
+		JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
+	}
+       
     }//GEN-LAST:event_btnBorrarActionPerformed
 
 
