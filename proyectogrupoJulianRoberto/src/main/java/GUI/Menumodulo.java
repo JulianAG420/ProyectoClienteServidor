@@ -143,7 +143,9 @@ public class Menumodulo extends javax.swing.JFrame {
     }//GEN-LAST:event_AlmuerzosActionPerformed
 
     private void PlanillasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlanillasActionPerformed
-       
+        RegistroPlanilla RegistroPlanilla = new RegistroPlanilla();
+          RegistroPlanilla.setVisible(true);
+          RegistroPlanilla.setLocationRelativeTo(this);
     }//GEN-LAST:event_PlanillasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,44 +11,29 @@ import java.io.Serializable;
  * @author yulien
  */
 public class AlmuerzoA implements Serializable{
-    private int dia;
-    private int mes;
-    private int anio;
+    private String  fecha;
+
     private String tipoBeca;
     
-     public AlmuerzoA( int dia, int mes, int anio, String tipoBeca) {
-        this.dia = dia;
-        this.mes= mes;
-        this.anio= anio;
+     public AlmuerzoA( String  fecha, String tipoBeca) {
+        this.fecha = fecha ;
+        
         this.tipoBeca= tipoBeca;
         
     }
       public AlmuerzoA() {
     }
 
-    public int getDia() {
-        return dia;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setDia(int dia) {
-        this.dia = dia;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public int getAnio() {
-        return anio;
-    }
-
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
+   
+ 
 
     public String getTipoBeca() {
         return tipoBeca;
@@ -59,6 +44,6 @@ public class AlmuerzoA implements Serializable{
     }
        @Override
     public String toString() {
-        return "Almuerzo Informacion{" + "Dia=" + dia +"mes=" + mes+", año=" + anio +"Tipo de Beca=" + tipoBeca + '}';
+        return "Almuerzo Informacion{" + "fecha =" + fecha  +"Tipo de Beca=" + tipoBeca + '}';
     }
 }

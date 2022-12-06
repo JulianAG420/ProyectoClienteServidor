@@ -57,7 +57,7 @@ public class VerProfesores extends javax.swing.JFrame {
             }
         });
 
-        data.setBackground(new java.awt.Color(155, 95, 250));
+        data.setBackground(new java.awt.Color(153, 153, 255));
         data.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

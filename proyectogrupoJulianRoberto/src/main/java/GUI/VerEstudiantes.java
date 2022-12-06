@@ -75,7 +75,7 @@ public class VerEstudiantes extends javax.swing.JFrame {
             }
         });
 
-        tabla.setBackground(new java.awt.Color(155, 95, 250));
+        tabla.setBackground(new java.awt.Color(255, 255, 153));
         tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

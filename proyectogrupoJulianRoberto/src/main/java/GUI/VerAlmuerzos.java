@@ -18,13 +18,11 @@ public class VerAlmuerzos extends javax.swing.JFrame {
         ArrayList<AlmuerzoA> A = ma.Leer2();
          
          modelo= new DefaultTableModel();
-        modelo.addColumn("Dia");
-        modelo.addColumn("Mes");
-        modelo.addColumn("Año");
+        modelo.addColumn("Fecha");
         modelo.addColumn("Tipo Beca");
         
         for (int i = 0; i < A.size(); i++) {
-            modelo.addRow(new Object[]{A.get(i).getDia(),A.get(i).getMes(),A.get(i).getAnio(),A.get(i).getTipoBeca()});
+            modelo.addRow(new Object[]{A.get(i).getFecha(),A.get(i).getTipoBeca()});
         }
         data.setModel(modelo);
     }
@@ -55,27 +53,27 @@ public class VerAlmuerzos extends javax.swing.JFrame {
             }
         });
 
-        data.setBackground(new java.awt.Color(155, 95, 250));
+        data.setBackground(new java.awt.Color(51, 102, 255));
         data.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Dia", "Mes", "Año", "Tipo de Beca"
+                "Fecha", "Tipo de Beca"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

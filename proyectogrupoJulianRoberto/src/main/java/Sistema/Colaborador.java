@@ -14,15 +14,15 @@ public class Colaborador implements Serializable {
     
     private int horasTrabajadas;
     private int horas;
-    private int mes;
+    private String mes;
     private int año;
     private int cedulaTrabajador;
 
-    public Colaborador(int horasTrabajadas, int horas, int mes, int año, int cedulaTrabajador) {
+    public Colaborador(int horasTrabajadas, int horas, String mes, int año, int cedulaTrabajador) {
         this.horasTrabajadas = horasTrabajadas;
         this.horas = horas;
-        this.mes = mes;
-        this.año = año;
+        this.año= año;
+        this.mes= mes; 
         this.cedulaTrabajador = cedulaTrabajador;
     }
 
@@ -45,13 +45,15 @@ public class Colaborador implements Serializable {
         this.horas = horas;
     }
 
-    public int getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(int mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
+
+   
 
     public int getAño() {
         return año;
