@@ -3,13 +3,19 @@ package GUI;
 
 import Sistema.Estudiantes;
 import Datos.Informacion;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VerEstudiantes extends javax.swing.JFrame {
       DefaultTableModel modelo;
+      private TableRowSorter trsfiltro;
+      String filtro;
     Informacion ma = new Informacion();
 
     public VerEstudiantes() {
@@ -19,9 +25,11 @@ public class VerEstudiantes extends javax.swing.JFrame {
         ArrayList<Estudiantes> ET = ma.Leer();
         
          modelo= new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido");
+         
+         
         modelo.addColumn("Cedula");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
         modelo.addColumn("Edad");
         modelo.addColumn("Beca");
         modelo.addColumn("Estado");
@@ -29,7 +37,7 @@ public class VerEstudiantes extends javax.swing.JFrame {
         this.tabla.setModel(modelo);
         for (int i = 0; i < ET.size(); i++) {
             
-           modelo.addRow(new Object[]{ET.get(i).getNombre(),ET.get(i).getApellidos(),ET.get(i).getCedula(),ET.get(i).getEdad(),ET.get(i).getEstadobeca(),ET.get(i).getEstudianteEstado(),ET.get(i).getSeccion()});
+           modelo.addRow(new Object[]{ET.get(i).getCedula(),ET.get(i).getNombre(),ET.get(i).getApellidos(),ET.get(i).getEdad(),ET.get(i).getEstadobeca(),ET.get(i).getEstudianteEstado(),ET.get(i).getSeccion()});
            
         }
         
@@ -52,6 +60,9 @@ public class VerEstudiantes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnborrar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnbuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,14 +91,14 @@ public class VerEstudiantes extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Cedula", "Edad", "Estado Beca", "Activo", "Seccion"
+                "Cedula", "Nombre", "Apellidos", "Edad", "Estado Beca", "Activo", "Seccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true
+                true, false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,32 +131,63 @@ public class VerEstudiantes extends javax.swing.JFrame {
             }
         });
 
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
+        });
+
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
         paneldataLayout.setHorizontalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
-                .addComponent(back)
-                .addGap(21, 21, 21))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(paneldataLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
+                .addGap(42, 42, 42)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(btnbuscar)
+                .addGap(18, 18, 18)
                 .addComponent(btnborrar)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
+                        .addComponent(back)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(324, 324, 324))))
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnborrar)
-                    .addComponent(btnModificar))
+                    .addComponent(btnModificar)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -182,13 +224,7 @@ public class VerEstudiantes extends javax.swing.JFrame {
 	}
 	//Limpieza del archivo .txt
 	
-	try {
-		PrintWriter writer = new PrintWriter("Estudiantes.txt");
-		writer.print("");
-		writer.close();
-	} catch (Exception e) {
-		JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
-	}
+	
     }//GEN-LAST:event_btnborrarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -201,15 +237,43 @@ public class VerEstudiantes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbuscarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        txtbuscar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e){
+                String cadena = txtbuscar.getText();
+                txtbuscar.setText(cadena);
+                filtro();
+            }
+        });
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+      trsfiltro = new TableRowSorter(tabla.getModel());
+      tabla.setRowSorter(trsfiltro);
+    }
+      public void filtro(){
+          filtro = txtbuscar.getText();
+          trsfiltro.setRowFilter(RowFilter.regexFilter(txtbuscar.getText(), 0));
+      
+    }//GEN-LAST:event_txtbuscarKeyTyped
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnborrar;
+    private javax.swing.JButton btnbuscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel paneldata;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

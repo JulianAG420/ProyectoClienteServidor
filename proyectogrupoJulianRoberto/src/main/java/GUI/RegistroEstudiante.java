@@ -239,7 +239,7 @@ Informacion ma = new Informacion();
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        String nombre=txtnombre.getText();
        String apellidos= txtapellido.getText();
-        int Cedula=Integer.parseInt(txtcedula.getText());
+       String Cedula=txtcedula.getText();
         int edad= Integer.parseInt(txtEdad.getText());
         String beca= txtbeca.getText();
         String estado = txtestado.getText();

@@ -15,12 +15,12 @@ import java.io.Serializable;
 public class Estudiantes implements Serializable{
      private String nombre;
      private String apellidos;
-    private int cedula;
+    private String cedula;
     private int edad;
     private String estadobeca;
     private String estudianteEstado;
     private String seccion;
-    public Estudiantes( String nombre,String apellidos, int cedula,int edad, String estadobeca,String estudianteEstado,String seccion) {
+    public Estudiantes( String nombre,String apellidos, String cedula,int edad, String estadobeca,String estudianteEstado,String seccion) {
         this.nombre = nombre;
         this.apellidos= apellidos;
         this.cedula = cedula;
@@ -48,11 +48,11 @@ public class Estudiantes implements Serializable{
         this.apellidos = apellidos;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
