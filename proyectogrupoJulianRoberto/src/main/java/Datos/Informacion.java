@@ -1,4 +1,4 @@
-package Sistema;
+package Datos;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,6 +10,7 @@ package Sistema;
  * @author yulien
  */
 
+import Sistema.Estudiantes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;

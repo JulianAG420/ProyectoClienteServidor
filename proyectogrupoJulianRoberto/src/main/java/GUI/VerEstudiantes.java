@@ -2,7 +2,7 @@
 package GUI;
 
 import Sistema.Estudiantes;
-import Sistema.Informacion;
+import Datos.Informacion;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

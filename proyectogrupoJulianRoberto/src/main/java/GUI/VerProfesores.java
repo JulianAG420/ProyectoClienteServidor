@@ -3,7 +3,7 @@ package GUI;
 
 
 
-import Sistema.Informacion2;
+import Datos.Informacion2;
 import Sistema.Profesores;
 import java.io.PrintWriter;
 import java.util.ArrayList;

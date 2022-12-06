@@ -5,7 +5,7 @@ package GUI;
 
 
 import Sistema.Cocineros;
-import Sistema.Informacion3;
+import Datos.Informacion3;
 import Sistema.Profesores;
 import java.io.IOException;
 import java.util.ArrayList;

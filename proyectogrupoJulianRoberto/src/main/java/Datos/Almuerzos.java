@@ -2,8 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Sistema;
+package Datos;
 
+/**
+ *
+ * @author yulien
+ */
+import Datos.Informacion;
+import Sistema.AlmuerzoA;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,18 +19,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- *
- * @author yulien
- */
-public class Informacion3 implements Serializable  {
-    public void Escribir(Cocineros C) {
+public class Almuerzos implements Serializable  {
+    public void Escribir(AlmuerzoA A) {
         try {
-            ArrayList<Cocineros> chef = Leer();
-            chef.add(C);
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("Cocineros.txt"));
-            for (Cocineros per : chef) {
+            ArrayList<AlmuerzoA> almuer = Leer2();
+            almuer.add(A);
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("Almuerzos.txt"));
+            for (AlmuerzoA per : almuer) {
                 os.writeObject(per);
             }
             os.close();
@@ -33,16 +34,16 @@ public class Informacion3 implements Serializable  {
         }
     }
 
-    public ArrayList<Cocineros> Leer() {
-        ArrayList<Cocineros> Informacion3 = new ArrayList<>();
+    public ArrayList<AlmuerzoA> Leer2() {
+        ArrayList<AlmuerzoA> Almuerzos = new ArrayList<>();
         try {
-            ObjectInputStream s = new ObjectInputStream(new FileInputStream("Cocineros.txt"));
+            ObjectInputStream s = new ObjectInputStream(new FileInputStream("Almuerzos.txt"));
 
-            Cocineros C = null;
-            C = (Cocineros) s.readObject();
-            while (C != null) {
-                Informacion3.add(C);
-                C = (Cocineros) s.readObject();
+            AlmuerzoA A = null;
+            A = (AlmuerzoA) s.readObject();
+            while (A != null) {
+                Almuerzos.add(A);
+                A = (AlmuerzoA) s.readObject();
             }
             s.close();
         } catch (IOException ex) {
@@ -50,9 +51,10 @@ public class Informacion3 implements Serializable  {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Informacion.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            System.out.println(Informacion3);
+            System.out.println(Almuerzos);
         }
-        return Informacion3;
+        return Almuerzos;
     }
    
 }
+

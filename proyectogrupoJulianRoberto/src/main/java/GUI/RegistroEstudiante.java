@@ -3,7 +3,7 @@ package GUI;
 
 
 
-import Sistema.Informacion;
+import Datos.Informacion;
 import Sistema.Estudiantes;
 import java.io.IOException;
 import java.util.ArrayList;

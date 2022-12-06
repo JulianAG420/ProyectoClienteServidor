@@ -4,7 +4,7 @@ package GUI;
 
 
 import Sistema.AlmuerzoA;
-import Sistema.Almuerzos;
+import Datos.Almuerzos;
 
 import javax.swing.table.DefaultTableModel;
 

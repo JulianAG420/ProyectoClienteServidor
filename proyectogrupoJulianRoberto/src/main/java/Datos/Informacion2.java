@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Sistema;
+package Datos;
 
+import Datos.Informacion;
+import Sistema.Profesores;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

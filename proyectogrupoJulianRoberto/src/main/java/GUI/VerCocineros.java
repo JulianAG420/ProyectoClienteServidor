@@ -4,7 +4,7 @@ package GUI;
 
 
 import Sistema.Cocineros;
-import Sistema.Informacion3;
+import Datos.Informacion3;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
