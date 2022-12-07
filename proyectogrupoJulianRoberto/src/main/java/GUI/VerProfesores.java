@@ -5,27 +5,40 @@ package GUI;
 
 import Datos.Informacion2;
 import Sistema.Profesores;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VerProfesores extends javax.swing.JFrame {
      DefaultTableModel modelo;
+      private TableRowSorter trsfiltro;
+      String filtro;
     Informacion2 ma = new Informacion2();
+    
     public VerProfesores() {
         initComponents();
-        ArrayList<Profesores> P = ma.Leer();
+        
+     vertabla();
+    }
+    
+    public void vertabla(){
+           ArrayList<Profesores> P = ma.Leer();
        
         modelo= new DefaultTableModel();
+        modelo.addColumn("Cedula");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Cedula");
         modelo.addColumn("Correo");
         modelo.addColumn("Estado");
         modelo.addColumn("Salario");
+        this.data.setModel(modelo);
         for (int i = 0; i < P.size(); i++) {
-            modelo.addRow(new Object[]{P.get(i).getNombre(),P.get(i).getApellidos(),P.get(i).getCedula(),P.get(i).getCorreo(),P.get(i).getProfesorEstado(),P.get(i).getSalariohora()});
+            modelo.addRow(new Object[]{P.get(i).getCedula(),P.get(i).getNombre(),P.get(i).getApellidos(),P.get(i).getCorreo(),P.get(i).getProfesorEstado(),P.get(i).getSalariohora()});
         }
         data.setModel(modelo);
     }
@@ -45,6 +58,10 @@ public class VerProfesores extends javax.swing.JFrame {
         data = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnBorrar = new javax.swing.JButton();
+        btnbuscar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        btntodo = new javax.swing.JButton();
+        btnmodificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,14 +90,14 @@ public class VerProfesores extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Cedula", "Correo", "Estado", "Salario"
+                "Cedula", "Nombre", "Apellidos", "Correo", "Estado", "Salario"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                true, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,37 +116,87 @@ public class VerProfesores extends javax.swing.JFrame {
 
         btnBorrar.setBackground(new java.awt.Color(195, 0, 0));
         btnBorrar.setForeground(new java.awt.Color(0, 0, 0));
-        btnBorrar.setText("Borrar");
+        btnBorrar.setText("Borrar ");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
             }
         });
 
+        btnbuscar.setBackground(new java.awt.Color(0, 255, 0));
+        btnbuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
+        });
+
+        btntodo.setBackground(new java.awt.Color(0, 0, 255));
+        btntodo.setForeground(new java.awt.Color(0, 0, 0));
+        btntodo.setText("Borrar Todo");
+        btntodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntodoActionPerformed(evt);
+            }
+        });
+
+        btnmodificar.setBackground(new java.awt.Color(174, 110, 255));
+        btnmodificar.setForeground(new java.awt.Color(0, 0, 0));
+        btnmodificar.setText("Modificar");
+
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
         paneldataLayout.setHorizontalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(back)
                 .addGap(21, 21, 21))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(paneldataLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(97, 97, 97)
+                .addGap(74, 74, 74)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnbuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBorrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btntodo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnmodificar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneldataLayout.createSequentialGroup()
+                        .addContainerGap(45, Short.MAX_VALUE)
+                        .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBorrar)
+                            .addComponent(btnbuscar)
+                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btntodo)
+                            .addComponent(btnmodificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(paneldataLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(back)
@@ -155,34 +222,71 @@ public class VerProfesores extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-		
-		if(((String)modelo.getValueAt(i, 0)).equals(btnBorrar.getText())) {	
-			modelo.removeRow(i);
-			break;
-			
-		}
-	}
-	//Limpieza del archivo .txt
+            if (data.getSelectedRow() == -1)
+            return;
+        modelo.removeRow(data.getSelectedRow());
 	
-	try {
-		PrintWriter writer = new PrintWriter("Profesores.txt");
-		writer.print("");
-		writer.close();
-	} catch (Exception e) {
-		JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
-	}
        
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+         txtbuscar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e){
+                String cadena = txtbuscar.getText();
+                txtbuscar.setText(cadena);
+                filtro();
+            }
+        });
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
+      
+    }
+    
+      public void filtro(){
+          filtro = txtbuscar.getText();
+          trsfiltro.setRowFilter(RowFilter.regexFilter(txtbuscar.getText(), 0));
+    }//GEN-LAST:event_txtbuscarActionPerformed
+
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+      trsfiltro = new TableRowSorter(data.getModel());
+      data.setRowSorter(trsfiltro);
+    }//GEN-LAST:event_txtbuscarKeyTyped
+
+    private void btntodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntodoActionPerformed
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            if(((String)modelo.getValueAt(i, 0)).equals(btntodo.getText())) {
+                modelo.removeRow(i);
+                break;
+
+            }
+        }
+        //Limpieza del archivo .txt
+
+        try {
+            PrintWriter writer = new PrintWriter("Profesores.txt");
+            writer.print("");
+            writer.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
+        }
+
+    }//GEN-LAST:event_btntodoActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnmodificar;
+    private javax.swing.JButton btntodo;
     private javax.swing.JTable data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel paneldata;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

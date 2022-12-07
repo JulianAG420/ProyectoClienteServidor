@@ -5,9 +5,7 @@ import Sistema.Estudiantes;
 import Datos.Informacion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -21,7 +19,11 @@ public class VerEstudiantes extends javax.swing.JFrame {
     public VerEstudiantes() {
         initComponents();
        
-       
+       vertabla();
+        
+    }
+
+   public void vertabla(){
         ArrayList<Estudiantes> ET = ma.Leer();
         
          modelo= new DefaultTableModel();
@@ -43,7 +45,6 @@ public class VerEstudiantes extends javax.swing.JFrame {
         
        tabla.setModel(modelo);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,11 +59,12 @@ public class VerEstudiantes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        btnborrar = new javax.swing.JButton();
+        btnborrartodo = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnbuscar = new javax.swing.JButton();
+        btnborrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,15 +117,17 @@ public class VerEstudiantes extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Datos de los Estudiantes");
 
-        btnborrar.setBackground(new java.awt.Color(155, 0, 0));
-        btnborrar.setForeground(new java.awt.Color(0, 0, 0));
-        btnborrar.setText("Borrar");
-        btnborrar.addActionListener(new java.awt.event.ActionListener() {
+        btnborrartodo.setBackground(new java.awt.Color(0, 0, 255));
+        btnborrartodo.setForeground(new java.awt.Color(0, 0, 0));
+        btnborrartodo.setText("Borrar Todo");
+        btnborrartodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnborrarActionPerformed(evt);
+                btnborrartodoActionPerformed(evt);
             }
         });
 
+        btnModificar.setBackground(new java.awt.Color(174, 110, 255));
+        btnModificar.setForeground(new java.awt.Color(0, 0, 0));
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,10 +146,21 @@ public class VerEstudiantes extends javax.swing.JFrame {
             }
         });
 
+        btnbuscar.setBackground(new java.awt.Color(0, 255, 0));
+        btnbuscar.setForeground(new java.awt.Color(0, 0, 0));
         btnbuscar.setText("Buscar");
         btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscarActionPerformed(evt);
+            }
+        });
+
+        btnborrar.setBackground(new java.awt.Color(195, 0, 0));
+        btnborrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnborrar.setText("Borrar");
+        btnborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnborrarActionPerformed(evt);
             }
         });
 
@@ -161,11 +176,13 @@ public class VerEstudiantes extends javax.swing.JFrame {
                 .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(btnbuscar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnborrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnborrartodo)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificar)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,10 +201,11 @@ public class VerEstudiantes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnborrar)
+                    .addComponent(btnborrartodo)
                     .addComponent(btnModificar)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbuscar))
+                    .addComponent(btnbuscar)
+                    .addComponent(btnborrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -213,10 +231,10 @@ public class VerEstudiantes extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+    private void btnborrartodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrartodoActionPerformed
      for (int i = 0; i < modelo.getRowCount(); i++) {
 		
-		if(((String)modelo.getValueAt(i, 0)).equals(btnborrar.getText())) {	
+		if(((String)modelo.getValueAt(i, 0)).equals(btnborrartodo.getText())) {	
 			modelo.removeRow(i);
 			break;
 			
@@ -225,15 +243,9 @@ public class VerEstudiantes extends javax.swing.JFrame {
 	//Limpieza del archivo .txt
 	
 	
-    }//GEN-LAST:event_btnborrarActionPerformed
+    }//GEN-LAST:event_btnborrartodoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-    
-               
-          
-              
-          
-		
 
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -262,12 +274,19 @@ public class VerEstudiantes extends javax.swing.JFrame {
       
     }//GEN-LAST:event_txtbuscarKeyTyped
 
+    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+         if (tabla.getSelectedRow() == -1)
+            return;
+        modelo.removeRow(tabla.getSelectedRow());
+    }//GEN-LAST:event_btnborrarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnborrar;
+    private javax.swing.JButton btnborrartodo;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

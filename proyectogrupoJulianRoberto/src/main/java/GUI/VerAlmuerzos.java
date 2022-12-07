@@ -4,28 +4,66 @@ package GUI;
 
 
 import Datos.Almuerzos;
+import Datos.Informacion;
 
 import Sistema.AlmuerzoA;
+import Sistema.Estudiantes;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VerAlmuerzos extends javax.swing.JFrame {
   DefaultTableModel modelo;
-    Almuerzos ma = new Almuerzos();
+   DefaultTableModel modelo1;
+      Informacion ma = new Informacion();
+    Almuerzos me = new Almuerzos();
+    private TableRowSorter trsfiltro;
+      String filtro;
     public VerAlmuerzos() {
         initComponents();
-        ArrayList<AlmuerzoA> A = ma.Leer2();
+            
+        vertabla();
+        vertabla1();
          
+        
+    } 
+    
+public void vertabla(){
+     ArrayList<Estudiantes> ET = ma.Leer();
+     modelo1 = new DefaultTableModel();
          modelo= new DefaultTableModel();
+         modelo1.addColumn("Cedula");
+         modelo1.addColumn("Nombre");
+        modelo1.addColumn("Apellido");
+        modelo1.addColumn("Edad");
+        modelo1.addColumn("Estado Beca");
+        modelo1.addColumn("Activo");
+        modelo1.addColumn("Seccion");
+        this.data1.setModel(modelo1);
+        for (int i = 0; i < ET.size(); i++) {
+            
+           modelo1.addRow(new Object[]{ET.get(i).getCedula(),ET.get(i).getNombre(),ET.get(i).getApellidos(),ET.get(i).getEdad(),ET.get(i).getEstadobeca(),ET.get(i).getEstudianteEstado(),ET.get(i).getSeccion()});
+           
+        }
+        data1.setModel(modelo1);
+}
+public void vertabla1(){
+    ArrayList<AlmuerzoA> A = me.Leer2();
+         
+        
         modelo.addColumn("Fecha");
         modelo.addColumn("Tipo Beca");
-        
+         this.data.setModel(modelo);
         for (int i = 0; i < A.size(); i++) {
             modelo.addRow(new Object[]{A.get(i).getFecha(),A.get(i).getTipoBeca()});
         }
         data.setModel(modelo);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,21 +75,19 @@ public class VerAlmuerzos extends javax.swing.JFrame {
     private void initComponents() {
 
         paneldata = new javax.swing.JPanel();
-        back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        txtfecha = new javax.swing.JTextField();
+        btnbuscar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        data1 = new javax.swing.JTable();
+        btnretiro = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        back.setBackground(new java.awt.Color(0, 195, 25));
-        back.setForeground(new java.awt.Color(0, 0, 0));
-        back.setText("Regresar");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
+        paneldata.setForeground(new java.awt.Color(0, 0, 0));
 
         data.setBackground(new java.awt.Color(51, 102, 255));
         data.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -86,41 +122,114 @@ public class VerAlmuerzos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Almuerzos");
 
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+        btnbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                btnbuscarKeyTyped(evt);
+            }
+        });
+
+        data1.setBackground(new java.awt.Color(51, 102, 255));
+        data1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        data1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cedula", "Nombre", "Apellidos", "Edad", "Estado Beca", "Estado", "Seccion"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(data1);
+
+        btnretiro.setBackground(new java.awt.Color(78, 80, 185));
+        btnretiro.setText("Retirar");
+        btnretiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnretiroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
         paneldataLayout.setHorizontalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
-                .addComponent(back)
-                .addGap(21, 21, 21))
             .addGroup(paneldataLayout.createSequentialGroup()
-                .addGap(305, 305, 305)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnbuscar)
+                .addGap(39, 39, 39)
+                .addComponent(btnretiro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(btnretiro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(back)
-                .addGap(20, 20, 20))
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
+
+        back.setBackground(new java.awt.Color(0, 195, 25));
+        back.setForeground(new java.awt.Color(0, 0, 0));
+        back.setText("Regresar");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(paneldata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(back)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneldata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(paneldata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(back)
+                .addContainerGap())
         );
 
         pack();
@@ -130,13 +239,44 @@ public class VerAlmuerzos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
+     public void filtro(){
+          filtro = txtfecha.getText();
+          trsfiltro.setRowFilter(RowFilter.regexFilter(txtfecha.getText(), 0));
+    }
+    
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+      
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btnbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnbuscarKeyTyped
+       txtfecha.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e){
+                String cadena = txtfecha.getText();
+               txtfecha.setText(cadena);
+                filtro();
+            }
+        });
+    }//GEN-LAST:event_btnbuscarKeyTyped
+
+    private void btnretiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnretiroActionPerformed
+        if (data.getSelectedRow() == -1)
+            return;
+        modelo.removeRow(data.getSelectedRow());
+    }//GEN-LAST:event_btnretiroActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnretiro;
     private javax.swing.JTable data;
+    private javax.swing.JTable data1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel paneldata;
+    private javax.swing.JTextField txtfecha;
     // End of variables declaration//GEN-END:variables
 }

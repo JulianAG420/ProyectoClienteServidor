@@ -5,30 +5,41 @@ package GUI;
 
 import Sistema.Cocineros;
 import Datos.Informacion3;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class VerCocineros extends javax.swing.JFrame {
   DefaultTableModel modelo;
     Informacion3 ma = new Informacion3();
+    private TableRowSorter trsfiltro;
+      String filtro;
     public VerCocineros() {
         initComponents();
+        vertabla();
+    }
+
+    public void vertabla(){
         ArrayList<Cocineros> C = ma.Leer();
          
          modelo= new DefaultTableModel();
+        modelo.addColumn("Cedula");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Cedula");
         modelo.addColumn("Estado");
         modelo.addColumn("Salario");
+         this.data.setModel(modelo);
         for (int i = 0; i < C.size(); i++) {
-            modelo.addRow(new Object[]{C.get(i).getNombre(),C.get(i).getApellidos(),C.get(i).getCedula(),C.get(i).getCocineroEstado(),C.get(i).getSalariohora()});
+            modelo.addRow(new Object[]{C.get(i).getCedula(),C.get(i).getNombre(),C.get(i).getApellidos(),C.get(i).getCocineroEstado(),C.get(i).getSalariohora()});
         }
         data.setModel(modelo);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +54,11 @@ public class VerCocineros extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         data = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btntodo = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        btnbuscar = new javax.swing.JButton();
         btnborrar = new javax.swing.JButton();
+        btnmodificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,14 +87,14 @@ public class VerCocineros extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Cedula", "Estado ", "Salario x Hora"
+                "Cedula", "Nombre", "Apellidos", "Estado ", "Salario x Hora"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                true, false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -96,7 +111,31 @@ public class VerCocineros extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Datos de los Cocineros");
 
-        btnborrar.setBackground(new java.awt.Color(185, 0, 0));
+        btntodo.setBackground(new java.awt.Color(0, 0, 255));
+        btntodo.setForeground(new java.awt.Color(0, 0, 0));
+        btntodo.setText("Borrar Todo");
+        btntodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntodoActionPerformed(evt);
+            }
+        });
+
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
+        });
+
+        btnbuscar.setBackground(new java.awt.Color(0, 255, 0));
+        btnbuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
+        btnborrar.setBackground(new java.awt.Color(195, 0, 0));
         btnborrar.setForeground(new java.awt.Color(0, 0, 0));
         btnborrar.setText("Borrar");
         btnborrar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,30 +144,46 @@ public class VerCocineros extends javax.swing.JFrame {
             }
         });
 
+        btnmodificar.setBackground(new java.awt.Color(174, 110, 255));
+        btnmodificar.setForeground(new java.awt.Color(0, 0, 0));
+        btnmodificar.setText("Modificar");
+
         javax.swing.GroupLayout paneldataLayout = new javax.swing.GroupLayout(paneldata);
         paneldata.setLayout(paneldataLayout);
         paneldataLayout.setHorizontalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
-                .addComponent(back)
-                .addGap(21, 21, 21))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(paneldataLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(75, 75, 75)
+                .addGap(63, 63, 63)
+                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnbuscar)
+                .addGap(18, 18, 18)
                 .addComponent(btnborrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btntodo)
+                .addGap(18, 18, 18)
+                .addComponent(btnmodificar)
+                .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(back)
+                .addGap(21, 21, 21))
         );
         paneldataLayout.setVerticalGroup(
             paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldataLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(paneldataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnborrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar)
+                    .addComponent(btnborrar)
+                    .addComponent(btntodo)
+                    .addComponent(btnmodificar))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(back)
@@ -153,10 +208,10 @@ public class VerCocineros extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
-    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+    private void btntodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntodoActionPerformed
            for (int i = 0; i < modelo.getRowCount(); i++) {
 		
-		if(((String)modelo.getValueAt(i, 0)).equals(btnborrar.getText())) {	
+		if(((String)modelo.getValueAt(i, 0)).equals(btntodo.getText())) {	
 			modelo.removeRow(i);
 			break;
 			
@@ -172,6 +227,31 @@ public class VerCocineros extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(null,"Ocurrio un problema"+ e.toString());
 	}
       
+    }//GEN-LAST:event_btntodoActionPerformed
+ public void filtro(){
+          filtro = txtbuscar.getText();
+          trsfiltro.setRowFilter(RowFilter.regexFilter(txtbuscar.getText(), 0));
+    }   
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+      trsfiltro = new TableRowSorter(data.getModel());
+      data.setRowSorter(trsfiltro);
+    }//GEN-LAST:event_txtbuscarKeyTyped
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+   txtbuscar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e){
+                String cadena = txtbuscar.getText();
+                txtbuscar.setText(cadena);
+                filtro();
+            }
+        });
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+     if (data.getSelectedRow() == -1)
+            return;
+        modelo.removeRow(data.getSelectedRow());
     }//GEN-LAST:event_btnborrarActionPerformed
 
 
@@ -179,9 +259,13 @@ public class VerCocineros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton btnborrar;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnmodificar;
+    private javax.swing.JButton btntodo;
     private javax.swing.JTable data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel paneldata;
+    private javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -227,7 +227,7 @@ public class RegistroProfesor extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        String nombre=txtnombre.getText();
        String apellidos= txtapellido.getText();
-        int Cedula=Integer.parseInt(txtcedula.getText());
+        String Cedula=txtcedula.getText();
         String correo = txtcorreo.getText();
         String Estado = txtestadoprofesor.getText();
         int salario = Integer.parseInt(txtsalario.getText());
