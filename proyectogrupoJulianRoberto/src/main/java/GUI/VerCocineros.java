@@ -2,7 +2,7 @@
 package GUI;
 
 
-
+//para el boton de buscar, primero estripar el boton de buscar y despues poner la cedula que desea buscar 
 import Sistema.Cocineros;
 import Datos.Informacion3;
 import java.awt.event.KeyAdapter;

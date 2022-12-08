@@ -1,6 +1,7 @@
 
 package GUI;
 
+//para el boton de buscar, primero estripar el boton de buscar y despues poner la cedula que desea buscar 
 import Sistema.Estudiantes;
 import Datos.Informacion;
 import java.awt.event.KeyAdapter;
