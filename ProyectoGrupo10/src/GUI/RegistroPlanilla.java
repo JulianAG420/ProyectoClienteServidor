@@ -71,7 +71,7 @@ public class RegistroPlanilla extends javax.swing.JFrame {
         TableModel modeloDatos = jTable.getModel();
 
         Vector<String> columnNames = new Vector<>();
-        //int columnCount = (Integer.parseInt(contarAutos()));
+     
         columnNames.add("ID");
         columnNames.add("Cedula");
         columnNames.add("Nombre");

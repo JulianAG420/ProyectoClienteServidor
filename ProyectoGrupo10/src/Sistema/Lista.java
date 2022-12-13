@@ -5,10 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-/**
- *
- * @author Jorge Hernandez Araya | jorge09ha
- */
+
 public class Lista {
 
     
@@ -45,7 +42,7 @@ public class Lista {
             System.out.println("No hay nada en la lista.");
             System.out.println("~".repeat(30));
         } else {
-            System.out.println("Esta es la lista circular actual.");
+            System.out.println("Esta es la lista.");
             while (aux != tailA) {
                 System.out.println(aux.getValue().toString());
                 aux = aux.getNext();
