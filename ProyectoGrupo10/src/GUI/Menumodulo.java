@@ -3,12 +3,8 @@ package GUI;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Menumodulo extends javax.swing.JFrame {
-    //ArrayList<Persona> personasLectura = ma.LeerDatosDeArchivo();
 
     public Menumodulo() throws IOException {
         initComponents();
@@ -123,7 +119,7 @@ public class Menumodulo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//apartado de registro
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         registro registro = new registro();
         registro.setVisible(true);

@@ -5,8 +5,7 @@ package GUI;
 
 import Datos.Informacion;
 import Sistema.Estudiantes;
-import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class RegistroEstudiante extends javax.swing.JFrame {
 Informacion ma = new Informacion();
@@ -235,7 +234,7 @@ Informacion ma = new Informacion();
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+//apartado de registro
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        String nombre=txtnombre.getText();
        String apellidos= txtapellido.getText();

@@ -31,7 +31,7 @@ public class VerAlmuerzos extends javax.swing.JFrame {
          
         
     } 
-    
+   //ver tabla 
 public void vertabla(){
      ArrayList<Estudiantes> ET = ma.Leer();
      modelo1 = new DefaultTableModel();

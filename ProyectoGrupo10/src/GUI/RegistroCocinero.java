@@ -6,9 +6,7 @@ package GUI;
 
 import Sistema.Cocineros;
 import Datos.Informacion3;
-import Sistema.Profesores;
-import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class RegistroCocinero extends javax.swing.JFrame {
     Informacion3 ma = new Informacion3();
@@ -200,7 +198,7 @@ public class RegistroCocinero extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+//apartado de registro
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        String nombre=txtnombre.getText();
        String apellidos= txtapellido.getText();

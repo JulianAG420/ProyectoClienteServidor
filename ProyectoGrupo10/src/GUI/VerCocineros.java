@@ -23,7 +23,7 @@ public class VerCocineros extends javax.swing.JFrame {
         initComponents();
         vertabla();
     }
-
+//ver tabla
     public void vertabla(){
         ArrayList<Cocineros> C = ma.Leer();
          
